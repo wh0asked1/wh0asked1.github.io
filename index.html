@@ -11,11 +11,11 @@
             padding: 0;
             background-color: #000;
             color: #fff;
-            overflow-x: hidden; /* Prevent horizontal scrollbar */
+            overflow-x: hidden;
         }
 
-        .welcome-section {
-            height: 100vh; /* Full viewport height for welcome section */
+      .welcome-section {
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -23,59 +23,88 @@
             text-align: center;
         }
 
-        .welcome-title {
-            font-size: 3em; /* Adjust as needed */
+      .welcome-title {
+            font-size: 3em;
             font-weight: bold;
-            opacity: 0; /* Initially hidden */
-            animation: fadeIn 1s ease-in-out 0.5s forwards; /* Fade in animation */
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 0.5s forwards;
+            margin-bottom: 20px; /* Space below title */
         }
 
-        .intro-section, .other-section {
+      .middle-button {
+            background-color: #fff;
+            color: #000;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 1s forwards; /* Delay animation */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+      .middle-button:hover {
+            background-color: #eee;
+        }
+
+
+      .intro-section,.other-section {
             padding: 40px;
-            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
-            opacity: 0; /* Initially hidden */
-            transform: translateY(20px); /* Start slightly below */
-            transition: opacity 1s ease, transform 1s ease; /* Smooth transition */
+            background-color: rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
         }
 
-        .intro-section.active, .other-section.active {
+      .intro-section.active,.other-section.active {
             opacity: 1;
-            transform: translateY(0); /* Move into place */
+            transform: translateY(0);
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        /* Basic styling - Customize as needed */
         h2 { margin-bottom: 20px; }
         p {
             line-height: 1.6;
             margin-bottom: 20px;
+            border: 1px solid #333; /* Subtle border for paragraphs */
+            padding: 15px; /* Add some padding inside the border */
+            border-radius: 5px; /* Rounded corners for the border */
         }
+        img {
+            max-width: 100%; /* Make images responsive */
+            height: auto;
+            display: block; /* Prevent image from affecting text flow */
+            margin: 20px auto; /* Center the image */
+            border: 1px solid #333; /* Border for images */
+            padding: 5px;
+            border-radius: 5px;
+        }
+
     </style>
 </head>
 <body>
 
     <section class="welcome-section">
         <h1 class="welcome-title">Welcome to Our Website</h1>
+        <a href="#" class="middle-button">Learn More</a>
     </section>
 
     <section class="intro-section">
         <h2>Introduction</h2>
-        <p>This is the introduction section.  Tell people about your website, your mission, and what they can expect to find here.  Be concise and engaging.</p>
+        <p>This is the introduction section. Tell people about your website, your mission, and what they can expect to find here. Be concise and engaging.</p>
         <p>Add more paragraphs as needed.</p>
-    </section>
+        <img src="placeholder-image.jpg" alt="Introduction Image">  </section>
 
     <section class="other-section">
         <h2>Other Content</h2>
-        <p>This is another section where you can showcase other aspects of your website.  Perhaps you have services, products, a blog, or a portfolio.  Use this space to highlight what makes your site unique.</p>
+        <p>This is another section where you can showcase other aspects of your website. Perhaps you have services, products, a blog, or a portfolio. Use this space to highlight what makes your site unique.</p>
         <p>Include images or other content here.</p>
+        <img src="another-image.png" alt="Other Content Image">
     </section>
 
     <script>
@@ -83,7 +112,7 @@
         const otherSection = document.querySelector('.other-section');
 
         function handleScroll() {
-            const triggerPoint = window.innerHeight * 0.8; // Adjust as needed
+            const triggerPoint = window.innerHeight * 0.8;
 
             if (introSection.getBoundingClientRect().top < triggerPoint) {
                 introSection.classList.add('active');
