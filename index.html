@@ -9,59 +9,75 @@
             font-family: sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0; /* Light gray background */
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh; /* Ensure full viewport height */
+            min-height: 100vh;
+            overflow: hidden; /* Hide scrollbars for stars */
+        }
+
+        /* Starry background effect */
+        .star-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Behind the content */
+            background-image: url("data:image/svg+xml,%3Csvg width='200' height='200'%3E%3Cdefs%3E%3Cpattern id='star' x='0' y='0' width='10' height='10' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='1' cy='1' r='0.5' fill='white' /%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23star)' /%3E%3C/svg%3E"); /* SVG stars */
         }
 
         .container {
-            background-color: white;
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black container */
             padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* White shadow */
             text-align: center;
+            max-width: 800px; /* Limit container width for larger screens */
         }
 
         h1 {
-            color: #333; /* Dark gray heading */
+            color: #fff;
             margin-bottom: 20px;
         }
 
         p {
-            color: #666; /* Slightly lighter gray text */
+            color: #eee; /* Slightly off-white text */
             line-height: 1.6;
-            margin-bottom: 30px; /* Space between paragraphs */
-         }
+            margin-bottom: 30px;
+        }
 
-        .cta-button {  /* Style for the call to action button */
+        .cta-button {
             display: inline-block;
             padding: 15px 30px;
-            background-color: #007bff; /* Blue button */
-            color: white;
+            background-color: #fff; /* White button */
+            color: #000; /* Black text */
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
-            transition: background-color 0.3s ease; /* Smooth hover effect */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
         }
 
         .cta-button:hover {
-            background-color: #0056b3; /* Darker blue on hover */
+            background-color: #eee; /* Slightly off-white on hover */
+            color: #000;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="star-bg"></div> <div class="container">
         <h1>Welcome to Our Website!</h1>
 
-        <p>We're thrilled to have you here.  Explore our site to discover exciting content, helpful resources, and connect with our community.  Whether you're a new visitor or a returning friend, we hope you find something valuable.</p>
+        <p>We're thrilled to have you here. Explore our site to discover exciting content, helpful resources, and connect with our community. Whether you're a new visitor or a returning friend, we hope you find something valuable.</p>
 
-        <p>We're passionate about [mention your website's topic/purpose - e.g., sharing knowledge, connecting people, providing services].  Our goal is to [mention your website's goal - e.g.,  inform, entertain, empower]. </p>
+        <p>We're passionate about [mention your website's topic/purpose]. Our goal is to [mention your website's goal].</p>
 
-        <a href="#" class="cta-button">Get Started</a>  </div>
+        <a href="#" class="cta-button">Get Started</a>
+    </div>
 
 </body>
 </html>
