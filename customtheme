@@ -242,6 +242,9 @@
         "WHITE_630": "#DEE8FD",
 		"ROLE_DEFAULT": "#1B1E27",
 		"BLACK_460": "#1B1E27"
+"background": {
+    "alpha": 5,
+    "url": "https://github.com/VodkaXMartini/images/blob/main/Vision3.jpg?raw=true"
     },
     "plus": {
        "version": "0",
@@ -299,7 +302,3 @@
     },
     "spec": 2
     }
-"background": {
-    "alpha": 5,
-    "url": "https://github.com/VodkaXMartini/images/blob/main/Vision3.jpg?raw=true"
-}
