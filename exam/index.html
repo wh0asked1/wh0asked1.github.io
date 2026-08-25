@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn Tập Công Nghệ 10 - Bộ Đề Số 2</title>
+    <style>
+        :root {
+            --primary-color: #0284c7;
+            --primary-hover: #0369a1;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --border-color: #e2e8f0;
+            --correct-color: #15803d;
+            --correct-bg: #dcfce7;
+            --wrong-color: #b91c1c;
+            --wrong-bg: #fee2e2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px 10px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 16px;
+            font-weight: 600;
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-color);
+        }
+
+        .question-number {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: #fff;
+        }
+
+        .option-item:hover {
+            border-color: var(--primary-color);
+            background-color: #f0f9ff;
+        }
+
+        .option-item input[type="radio"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .option-item.selected {
+            border-color: var(--primary-color);
+            background-color: #e0f2fe;
+        }
+
+        .option-item.correct {
+            border-color: var(--correct-color);
+            background-color: var(--correct-bg);
+            color: #14532d;
+            font-weight: 600;
+        }
+
+        .option-item.wrong {
+            border-color: var(--wrong-color);
+            background-color: var(--wrong-bg);
+            color: #7f1d1d;
+        }
+
+        .explanation {
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .explanation.visible {
+            display: block;
+            background-color: #f1f5f9;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 24px;
+            margin-bottom: 40px;
+        }
+
+        button {
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-reset {
+            background-color: #64748b;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background-color: #475569;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            header { padding: 16px; }
+            h1 { font-size: 1.4rem; }
+            .question-card { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Ôn Tập Công Nghệ 10 - Bộ Đề Số 2</h1>
+        <p class="subtitle">Đề ôn tập bổ sung từ đề cương HK1 năm học 2025-2026</p>
+        <div class="score-board">
+            <span>Tổng câu hỏi: <span id="total-count">0</span></span>
+            <span>Đã chọn: <span id="answered-count">0</span></span>
+            <span>Điểm số: <span id="score-count">0</span></span>
+        </div>
+    </header>
+
+    <div id="quiz-container"></div>
+
+    <div class="actions">
+        <button class="btn-submit" onclick="submitQuiz()">Nộp Bài & Kiểm Tra</button>
+        <button class="btn-reset" onclick="resetQuiz()">Làm Lại</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        {
+            id: 10,
+            question: "Theo lĩnh vực khoa học, phân loại công nghệ KHÔNG bao gồm:",
+            options: [
+                { key: "A", text: "Công nghệ cơ khí" },
+                { key: "B", text: "Công nghệ sinh học" },
+                { key: "C", text: "Công nghệ điện" },
+                { key: "D", text: "Công nghệ xây dựng" }
+            ],
+            answer: "D",
+            explanation: "Theo lĩnh vực khoa học, các công nghệ được chia thành công nghệ cơ khí, sinh học, điện, hóa học... Công nghệ xây dựng được phân loại theo lĩnh vực kỹ thuật[span_0](start_span)[span_0](end_span)."
+        },
+        {
+            id: 11,
+            question: "Ngành robot và trí tuệ nhân tạo được xây dựng trên những lĩnh vực nào?",
+            options: [
+                { key: "A", text: "Cơ khí, điện, điện tử, công nghệ thông tin" },
+                { key: "B", text: "Cơ khí, điện, điện tử, cơ điện tử và điều khiển tự động" },
+                { key: "C", text: "Cơ điện tử và điều khiển tự động, công nghệ thông tin" },
+                { key: "D", text: "Cơ khí, điện, điện tử, công nghệ thông tin, cơ điện tử và điều khiển tự động" }
+            ],
+            answer: "D",
+            explanation: "Ngành Robot & AI là sự hội tụ tích hợp của tất cả các ngành: Cơ khí, Điện, Điện tử, CNTT, Cơ điện tử và Điều khiển tự động[span_1](start_span)[span_1](end_span)."
+        },
+        {
+            id: 13,
+            question: "Đâu là tác động tích cực nổi bật của công nghệ đối với xã hội?",
+            options: [
+                { key: "A", text: "Xử lí những vấn đề về môi trường" },
+                { key: "B", text: "Khai thác tài nguyên thiên nhiên" },
+                { key: "C", text: "Con người lệ thuộc vào công nghệ" },
+                { key: "D", text: "Thúc đẩy kinh tế, xã hội phát triển, quản lí tốt xã hội" }
+            ],
+            answer: "D",
+            explanation: "Tác động tích cực quan trọng nhất của công nghệ là nâng cao năng suất, thúc đẩy phát triển kinh tế - xã hội và hỗ trợ quản lý xã hội[span_2](start_span)[span_2](end_span)."
+        },
+        {
+            id: 15,
+            question: "Để tạo ra phôi của các chi tiết máy, người ta thường sử dụng công nghệ nào?",
+            options: [
+                { key: "A", text: "Đúc, dập" },
+                { key: "B", text: "Tiện, gia công cơ khí" },
+                { key: "C", text: "Khoan, dập" },
+                { key: "D", text: "Đúc, tiện" }
+            ],
+            answer: "A",
+            explanation: "Các công nghệ như đúc và dập (gia công áp lực) được sử dụng phổ biến để tạo ra phôi trước khi gia công cắt gọt[span_3](start_span)[span_3](end_span)."
+        },
+        {
+            id: 28,
+            question: "Các tiêu chí cơ bản để đánh giá một công nghệ bao gồm:",
+            options: [
+                { key: "A", text: "Hiệu quả; độ tin cậy; kinh tế; môi trường" },
+                { key: "B", text: "Hiệu quả; độ tin cậy; kinh tế; môi trường; cấu tạo" },
+                { key: "C", text: "Hiệu quả; độ tin cậy; kinh tế; môi trường; độ bền" },
+                { key: "D", text: "Hiệu quả; độ tin cậy; kinh tế; môi trường; tính thẩm mĩ" }
+            ],
+            answer: "A",
+            explanation: "4 tiêu chí đánh giá công nghệ cốt lõi trong chương trình là: Hiệu quả, độ tin cậy, tính kinh tế và tác động môi trường[span_4](start_span)[span_4](end_span)."
+        },
+        {
+            id: 30,
+            question: "Đặc trưng cơ bản của cuộc cách mạng công nghiệp lần thứ ba là:",
+            options: [
+                { key: "A", text: "Công nghệ 4.0 và sản xuất hàng loạt" },
+                { key: "B", text: "Công nghệ thông tin và tự động hóa" },
+                { key: "C", text: "Năng lượng xanh và tự động hóa" },
+                { key: "D", text: "Công nghiệp nặng và tự động hóa" }
+            ],
+            answer: "B",
+            explanation: "Cách mạng công nghiệp lần thứ 3 (cuối thế kỷ 20) gắn liền với máy tính, bán dẫn, CNTT và tự động hóa[span_5](start_span)[span_5](end_span)."
+        },
+        {
+            id: 38,
+            question: "Trong sản xuất, bản vẽ kỹ thuật đóng vai trò:",
+            options: [
+                { key: "A", text: "Minh họa cho hướng dẫn sử dụng sản phẩm" },
+                { key: "B", text: "Là tài liệu giúp người tiêu dùng sử dụng sản phẩm an toàn" },
+                { key: "C", text: "Là tài liệu kỹ thuật khi bảo dưỡng sản phẩm" },
+                { key: "D", text: "Là tài liệu kỹ thuật để tiến hành chế tạo, thi công" }
+            ],
+            answer: "D",
+            explanation: "Trong sản xuất, bản vẽ kỹ thuật là căn cứ để công nhân và kỹ sư tiến hành chế tạo, lắp ráp và thi công[span_6](start_span)[span_6](end_span)."
+        },
+        {
+            id: 42,
+            question: "Kích thước tiêu chuẩn của khung tên trên bản vẽ kĩ thuật là:",
+            options: [
+                { key: "A", text: "140 x 32 mm" },
+                { key: "B", text: "142 x 30 mm" },
+                { key: "C", text: "150 x 32 mm" },
+                { key: "D", text: "140 x 30 mm" }
+            ],
+            answer: "A",
+            explanation: "Khung tên trên bản vẽ kĩ thuật học sinh theo tiêu chuẩn TCVN có kích thước là 140mm x 32mm[span_7](start_span)[span_7](end_span)."
+        },
+        {
+            id: 45,
+            question: "Đường kích thước trong bản vẽ kĩ thuật thường được vẽ như thế nào?",
+            options: [
+                { key: "A", text: "Vẽ bằng nét liền mảnh, song song với đối tượng cần ghi kích thước, hai đầu có mũi tên" },
+                { key: "B", text: "Vẽ bằng nét liền mảnh, vuông góc với đối tượng cần ghi kích thước, hai đầu có mũi tên" },
+                { key: "C", text: "Vẽ bằng nét liền đậm, song song với đối tượng cần ghi kích thước" },
+                { key: "D", text: "Vẽ bằng nét đứt mảnh, song song với đối tượng" }
+            ],
+            answer: "A",
+            explanation: "Đường kích thước được vẽ bằng nét liền mảnh, chạy song song với đoạn cần ghi kích thước và giới hạn 2 đầu bằng mũi tên[span_8](start_span)[span_8](end_span)."
+        },
+        {
+            id: 46,
+            question: "Đường gióng kích thước được quy định vẽ như thế nào?",
+            options: [
+                { key: "A", text: "Vẽ bằng nét liền mảnh, vuông góc với đối tượng cần ghi kích thước, vượt qua đường kích thước một đoạn" },
+                { key: "B", text: "Vẽ bằng nét liền mảnh, song song với đối tượng cần ghi kích thước" },
+                { key: "C", text: "Vẽ bằng nét đứt mảnh, vuông góc với đối tượng" },
+                { key: "D", text: "Vẽ bằng nét gạch chấm mảnh" }
+            ],
+            answer: "A",
+            explanation: "Đường gióng kẻ bằng nét liền mảnh, vuông góc với đoạn đường kích thước và nhô qua đường kích thước khoảng 2 - 5 mm[span_9](start_span)[span_9](end_span)."
+        }
+    ];
+
+    let userAnswers = {};
+
+    function initQuiz() {
+        const container = document.getElementById('quiz-container');
+        document.getElementById('total-count').innerText = questions.length;
+        container.innerHTML = '';
+
+        questions.forEach((q, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.id = `card-${q.id}`;
+
+            let optionsHtml = q.options.map(opt => `
+                <label class="option-item" id="opt-${q.id}-${opt.key}">
+                    <input type="radio" name="q-${q.id}" value="${opt.key}" onchange="selectOption(${q.id}, '${opt.key}')">
+                    <span><strong>${opt.key}.</strong> ${opt.text}</span>
+                </label>
+            `).join('');
+
+            card.innerHTML = `
+                <div class="question-number">Câu ${index + 1} / ${questions.length}</div>
+                <div class="question-text">${q.question}</div>
+                <div class="options-list">${optionsHtml}</div>
+                <div class="explanation" id="exp-${q.id}">
+                    <strong>Đáp án đúng: ${q.answer}</strong>. ${q.explanation}
+                </div>
+            `;
+            container.appendChild(card);
+        });
+
+        updateProgress();
+    }
+
+    function selectOption(qId, key) {
+        userAnswers[qId] = key;
+        
+        const card = document.getElementById(`card-${qId}`);
+        const options = card.querySelectorAll('.option-item');
+        options.forEach(opt => opt.classList.remove('selected'));
+        
+        const selectedOpt = document.getElementById(`opt-${qId}-${key}`);
+        if (selectedOpt) selectedOpt.classList.add('selected');
+
+        updateProgress();
+    }
+
+    function updateProgress() {
+        const count = Object.keys(userAnswers).length;
+        document.getElementById('answered-count').innerText = count;
+    }
+
+    function submitQuiz() {
+        let score = 0;
+        
+        questions.forEach(q => {
+            const selectedKey = userAnswers[q.id];
+            const exp = document.getElementById(`exp-${q.id}`);
+            
+            q.options.forEach(opt => {
+                const optEl = document.getElementById(`opt-${q.id}-${opt.key}`);
+                if (opt.key === q.answer) {
+                    optEl.classList.add('correct');
+                } else if (selectedKey === opt.key) {
+                    optEl.classList.add('wrong');
+                }
+            });
+
+            if (selectedKey === q.answer) {
+                score++;
+            }
+
+            exp.classList.add('visible');
+        });
+
+        document.getElementById('score-count').innerText = `${score} / ${questions.length}`;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+        userAnswers = {};
+        document.getElementById('score-count').innerText = '0';
+        initQuiz();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.addEventListener('DOMContentLoaded', initQuiz);
+</script>
+
+</body>
+</html>
