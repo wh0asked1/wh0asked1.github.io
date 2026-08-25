@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Ôn Tập Công Nghệ 10 - HK1</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; background-color: #f4f4f9; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #333; }
+        .question { font-weight: bold; margin-top: 15px; }
+        .options { margin-bottom: 10px; }
+        .options label { display: block; margin: 4px 0; cursor: pointer; }
+        button { background-color: #28a745; color: white; border: none; padding: 10px 15px; font-size: 16px; border-radius: 5px; cursor: pointer; margin-top: 20px; }
+        button:hover { background-color: #218838; }
+        #result { font-weight: bold; margin-top: 20px; font-size: 18px; color: #007bff; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Ôn Tập Công Nghệ 10 - Học Kỳ 1</h1>
+    <form id="quizForm">
+        <!-- Câu 1 -->
+        <div class="question">Câu 1. Hàn là phương pháp gia công đưa kim loại chỗ mối nối về trạng thái:[span_0](start_span)[span_0](end_span)</div>
+        <div class="options">
+            <label><input type="radio" name="q1" value="A"> A. lỏng[span_1](start_span)[span_1](end_span)</label>
+            <label><input type="radio" name="q1" value="B"> B. rắn[span_2](start_span)[span_2](end_span)</label>
+            <label><input type="radio" name="q1" value="C"> C. nóng chảy[span_3](start_span)[span_3](end_span)</label>
+            <label><input type="radio" name="q1" value="D"> D. Khí[span_4](start_span)[span_4](end_span)</label>
+        </div>
+
+        <!-- Câu 2 -->
+        <div class="question">Câu 2. Đặc trưng của cách mạng công nghiệp lần thứ nhất là nguồn năng lượng:[span_5](start_span)[span_5](end_span)</div>
+        <div class="options">
+            <label><input type="radio" name="q2" value="A"> A. hơi nước và cơ giới hóa[span_6](start_span)[span_6](end_span)</label>
+            <label><input type="radio" name="q2" value="B"> B. điện và cơ giới hóa[span_7](start_span)[span_7](end_span)</label>
+            <label><input type="radio" name="q2" value="C"> C. khí đốt và cơ giới hóa[span_8](start_span)[span_8](end_span)</label>
+            <label><input type="radio" name="q2" value="D"> D. nguyên tử và cơ giới hóa[span_9](start_span)[span_9](end_span)</label>
+        </div>
+
+        <!-- Câu 8 -->
+        <div class="question">Câu 8. Chế tạo máy là ngành thuộc lĩnh vực:[span_10](start_span)[span_10](end_span)</div>
+        <div class="options">
+            <label><input type="radio" name="q8" value="A"> A. kỹ thuật điện[span_11](start_span)[span_11](end_span)</label>
+            <label><input type="radio" name="q8" value="B"> B. kỹ thuật cơ khí[span_12](start_span)[span_12](end_span)</label>
+            <label><input type="radio" name="q8" value="C"> C. kỹ thuật xây dựng[span_13](start_span)[span_13](end_span)</label>
+            <label><input type="radio" name="q8" value="D"> D. kỹ thuật hóa học[span_14](start_span)[span_14](end_span)</label>
+        </div>
+
+        <button type="button" onclick="checkAnswers()">Nộp bài / Kiểm tra</button>
+    </form>
+    <div id="result"></div>
+</div>
+
+<script>
+    const answers = {
+        q1: "C",
+        q2: "A",
+        q8: "B"
+    };
+
+    function checkAnswers() {
+        let score = 0;
+        let total = Object.keys(answers).length;
+        
+        for (let key in answers) {
+            let selected = document.querySelector(`input[name="${key}"]:checked`);
+            if (selected && selected.value === answers[key]) {
+                score++;
+            }
+        }
+        
+        document.getElementById("result").innerText = `Kết quả của bạn: ${score} / ${total} câu đúng.`;
+    }
+</script>
+
+</body>
+</html>
